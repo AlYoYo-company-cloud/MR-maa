@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.toggle('dark');
     document.body.classList.toggle('light');
     localStorage.setItem('theme', document.body.className);
+    alert("تم تغيير الوضع");
   };
 
   document.getElementById('themeToggle').addEventListener('click', toggleTheme);
@@ -178,17 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
       students.push(newStudent);
       localStorage.setItem('students', JSON.stringify(students));
       renderStudents();
-    }
-  });
-
-  /* ---------- Add Lesson (Teacher) ---------- */
-  document.getElementById('addLessonBtn').addEventListener('click', () => {
-    const title = document.getElementById('lessonTitle').value.trim();
-    const yt = document.getElementById('lessonYouTube').value.trim();
-    const form = document.getElementById('lessonForm').value.trim();
-    if (title && yt && form) {
-      lessons.push({ title, yt, form });
-      renderLessons();
     }
   });
 
