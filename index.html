@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة الشهد</title>
+</head>
+<body class="dark">
+
+  <header>
+    <div class="logo">منصة الشهد</div>
+    <button id="themeToggle">تبديل الوضع</button>
+  </header>
+
+  <main>
+    <!-- تسجيل الدخول -->
+    <section id="landing" class="login-card card">
+      <h2>تسجيل الدخول</h2>
+      <select id="userType">
+        <option value="student">طالب</option>
+        <option value="teacher">مدرس</option>
+      </select>
+      <div id="studentFields">
+        <input type="text" id="studentCodeA" placeholder="الكود المميز A">
+        <input type="text" id="studentCodeB" placeholder="الكود المميز B">
+      </div>
+      <div id="teacherFields" class="hidden">
+        <input type="text" id="teacherUsername" placeholder="اسم المستخدم">
+        <input type="password" id="teacherPassword" placeholder="كلمة المرور">
+      </div>
+      <button id="loginBtn">دخول</button>
+      <p id="loginMsg" class="error"></p>
+    </section>
+
+    <!-- لوحة الطالب -->
+    <section id="studentPanel" class="hidden">
+      <h2>مرحباً، <span id="studentName"></span></h2>
+      
+      <!-- شريط التنقل -->
+      <div id="studentNavbar" class="card navbar">
+        <button id="showDetailsBtn">تفاصيل الحساب</button>
+        <button id="showLessonsBtn">الدروس المتاحة</button>
+        <button id="showExamsBtn">الامتحانات</button>
+        <button id="showLeaderboardBtn">لوحة الصدارة</button>
+      </div>
+
+      <!-- تفاصيل الحساب -->
+      <section id="accountDetails" class="card container hidden">
+        <h3>تفاصيل الحساب</h3>
+        <p><strong>الاسم: </strong><span id="accountStudentName"></span></p>
+        <p><strong>السنة الدراسية: </strong><span id="accountYear"></span></p>
+        <p><strong>المجموعة: </strong><span id="accountGroup"></span></p>
+        <button id="studentLogoutBtn">تسجيل الخروج</button>
+      </section>
+
+      <!-- الحصص -->
+      <div id="lessonsContainer" class="card container hidden">
+        <div id="lessonsList"></div>
+        <div id="lessonVideo" class="video-container hidden"></div>
+      </div>
+
+      <!-- الامتحانات -->
+      <div id="examsContainer" class="card container hidden">
+        <button class="examBtn" onclick="window.open('https://example.com/exam1')">امتحان 1</button>
+        <button class="examBtn" onclick="window.open('https://example.com/exam2')">امتحان 2</button>
+        <button class="examBtn" onclick="window.open('https://example.com/exam3')">امتحان 3</button>
+      </div>
+
+      <!-- لوحة الصدارة -->
+      <div id="leaderboardContainer" class="card container hidden"></div>
+
+    </section>
+
+    <!-- لوحة المدرس -->
+    <section id="teacherPanel" class="hidden">
+      <h2>لوحة المدرس</h2>
+
+      <div id="studentManagement" class="card">
+        <h3>إدارة الطلاب</h3>
+        <input type="text" id="newStudentName" placeholder="اسم الطالب">
+        <button id="addStudentBtn">إضافة طالب</button>
+        <div id="studentsList" class="list"></div>
+      </div>
+
+      <div id="lessonManagement" class="card">
+        <h3>إدارة الدروس</h3>
+        <input type="text" id="lessonTitle" placeholder="عنوان الدرس">
+        <input type="text" id="lessonYouTube" placeholder="رابط YouTube (embed)">
+        <button id="addLessonBtn">إضافة درس</button>
+        <div id="lessonsListTeacher" class="list"></div>
+      </div>
+
+      <button id="teacherLogoutBtn">تسجيل الخروج</button>
+    </section>
+
+  </main>
+
+</body>
+        </html>
