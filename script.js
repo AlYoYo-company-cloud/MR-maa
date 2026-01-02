@@ -49,6 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   };
 
+  /* ---------- Teacher Login ---------- */
+  const loginTeacher = (username, password) => {
+    if (username === teacher.username && password === teacher.password) {
+      showSection('teacherPanel');
+      renderStudents();
+      return null;
+    }
+    return 'بيانات المدرس غير صحيحة';
+  };
+
   document.getElementById('loginBtn').addEventListener('click', () => {
     const type = document.getElementById('userType').value;
     const errorMsg = document.getElementById('loginMsg');
@@ -59,16 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       errorMsg.innerText = err || '';
     } else {
-      if (
-        document.getElementById('teacherUsername').value === teacher.username &&
-        document.getElementById('teacherPassword').value === teacher.password
-      ) {
-        showSection('teacherPanel');
-        renderStudents();
-        errorMsg.innerText = '';
-      } else {
-        errorMsg.innerText = 'بيانات المدرس غير صحيحة';
-      }
+      const err = loginTeacher(
+        document.getElementById('teacherUsername').value.trim(),
+        document.getElementById('teacherPassword').value.trim()
+      );
+      errorMsg.innerText = err || '';
     }
   });
 
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   const renderLessons = () => {
-    const list = document.getElementById('lessonsList');
+    const list = document.getElementById('lessonsContainer');
     list.innerHTML = '';
     lessons.forEach((lesson, index) => {
       const btn = document.createElement('button');
@@ -109,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  document.getElementById('lessonsList').addEventListener('click', (e) => {
+  document.getElementById('lessonsContainer').addEventListener('click', (e) => {
     if (e.target && e.target.classList.contains('lessonBtn')) {
       const idx = e.target.dataset.index;
       const videoContainer = document.getElementById('lessonVideo');
@@ -159,5 +164,32 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem('students', JSON.stringify(students));
     renderStudents();
   };
+
+  /* ---------- Add New Student (Teacher) ---------- */
+  document.getElementById('addStudentBtn').addEventListener('click', () => {
+    const studentName = document.getElementById('newStudentName').value.trim();
+    if (studentName) {
+      const newStudent = {
+        name: studentName,
+        codeA: Math.random().toString(36).substring(2, 8).toUpperCase(),
+        codeB: Math.random().toString(36).substring(2, 8).toUpperCase(),
+        active: true
+      };
+      students.push(newStudent);
+      localStorage.setItem('students', JSON.stringify(students));
+      renderStudents();
+    }
+  });
+
+  /* ---------- Add Lesson (Teacher) ---------- */
+  document.getElementById('addLessonBtn').addEventListener('click', () => {
+    const title = document.getElementById('lessonTitle').value.trim();
+    const yt = document.getElementById('lessonYouTube').value.trim();
+    const form = document.getElementById('lessonForm').value.trim();
+    if (title && yt && form) {
+      lessons.push({ title, yt, form });
+      renderLessons();
+    }
+  });
 
 });
